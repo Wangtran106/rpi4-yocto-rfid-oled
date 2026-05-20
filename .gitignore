@@ -1,0 +1,19 @@
+# Ignore all files by default
+/*
+
+# Except these custom directories and files
+!/meta-rfid-oled/
+!/rfid_oled_project/
+!/.gitignore
+!/README.md
+
+# Ignore build artifacts in standalone project
+*.o
+*.ko
+*.mod.c
+*.mod
+*.cmd
+*.order
+*.symvers
+.tmp_versions/
+/rfid_oled_project/user_app/rfid_app

@@ -1,0 +1,49 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          rfid-setup
+# Required-Start:    $local_fs
+# Default-Start:     S
+# Default-Stop:
+# Short-Description: Setup RC522 RFID on SPI0.0
+### END INIT INFO
+
+case "$1" in
+    start)
+        echo "Setting up RC522 RFID SPI device..."
+
+        # Load our kernel module (registers the driver)
+        modprobe rc522_spi 2>/dev/null
+
+        # Check if spi0.0 exists
+        if [ ! -d /sys/bus/spi/devices/spi0.0 ]; then
+            echo "ERROR: /sys/bus/spi/devices/spi0.0 not found. Is SPI enabled?"
+            exit 1
+        fi
+
+        # Unbind spidev from spi0.0 (it occupies CS0 by default)
+        echo spi0.0 > /sys/bus/spi/drivers/spidev/unbind 2>/dev/null
+
+        # Tell kernel: use our rc522_spi driver for this device
+        echo rc522_spi > /sys/bus/spi/devices/spi0.0/driver_override
+
+        # Bind spi0.0 to our driver -> triggers probe() -> creates /dev/rc522
+        echo spi0.0 > /sys/bus/spi/drivers/rc522_spi/bind
+
+        if [ -c /dev/rc522 ]; then
+            echo "SUCCESS: /dev/rc522 created!"
+        else
+            echo "WARNING: /dev/rc522 not found after bind."
+        fi
+        ;;
+    stop)
+        echo spi0.0 > /sys/bus/spi/drivers/rc522_spi/unbind 2>/dev/null
+        rmmod rc522_spi 2>/dev/null
+        echo "RC522 driver unloaded."
+        ;;
+    *)
+        echo "Usage: $0 {start|stop}"
+        exit 1
+        ;;
+esac
+
+exit 0
