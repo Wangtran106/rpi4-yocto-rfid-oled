@@ -1,8 +1,3 @@
-# Smart OLED & RFID Access System (Raspberry Pi 4)
-
-Dự án này trình diễn kỹ năng viết Kernel Module cho SPI (RFID RC522) và ứng dụng C User-space giao tiếp I2C (OLED SSD1306). 
-Dự án được thiết kế độc lập, dễ hiểu, có thể cross-compile bằng toolchain của Buildroot/Yocto hoặc biên dịch trực tiếp trên Raspberry Pi.
-
 ## Sơ đồ đấu dây
 - **OLED SSD1306:** Nối vào I2C-1 (SDA: GPIO 2, SCL: GPIO 3, VCC: 3.3V, GND: GND)
 - **RC522 RFID:** Nối vào SPI0 (MOSI: GPIO 10, MISO: GPIO 9, SCLK: GPIO 11, CS/SDA: GPIO 8, VCC: 3.3V, GND: GND)
