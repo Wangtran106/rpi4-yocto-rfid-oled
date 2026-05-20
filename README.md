@@ -8,7 +8,7 @@ The system interfaces with:
 
 ---
 
-## 🛠️ Hardware Wiring
+## Hardware Wiring
 
 | Device | Peripheral Pin | Raspberry Pi 4 Pin | Physical Pin Number |
 | :--- | :--- | :--- | :--- |
@@ -25,7 +25,7 @@ The system interfaces with:
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 - `meta-rfid-oled/`: The custom Yocto Layer.
   - `recipes-kernel/rfid-module/`: Bitbake recipe & source code for the out-of-tree kernel SPI driver (`rc522_spi.c`).
@@ -36,7 +36,7 @@ The system interfaces with:
 
 ---
 
-## ⚙️ Architecture & Data Flow
+## Architecture & Data Flow
 
 ```mermaid
 graph TD
@@ -51,7 +51,7 @@ graph TD
 
 ---
 
-## 🚀 How to Build and Run
+## How to Build and Run
 
 ### Option A: Building with Yocto Project (Recommended)
 
